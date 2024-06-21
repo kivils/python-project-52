@@ -29,7 +29,8 @@ ALLOWED_HOSTS = [
     'webserver',
     '127.0.0.1',
     '172.29.52.102',
-    'localhost'
+    'localhost',
+    'python-project-52-afgy.onrender.com'
 ]
 
 # Application definition
