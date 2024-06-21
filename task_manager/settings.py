@@ -36,7 +36,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'task_manager',
-    # 'django_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
