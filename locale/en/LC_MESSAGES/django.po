@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-21 20:13+0300\n"
+"POT-Creation-Date: 2024-06-22 18:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: task_manager/settings.py:134
+#: task_manager/settings.py:133
 msgid "English"
 msgstr ""
 
-#: task_manager/settings.py:135
+#: task_manager/settings.py:134
 msgid "Russian"
 msgstr ""
 
-#: task_manager/templates/index.html:8
+#: task_manager/templates/index.html:9
 msgid "Hello from Hexlet!"
 msgstr ""
 
-#: task_manager/templates/layout.html:11
+#: task_manager/templates/layout.html:12
 msgid "Hexlet Task Manager"
 msgstr ""
