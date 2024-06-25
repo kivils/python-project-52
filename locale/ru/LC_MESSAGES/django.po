@@ -29,8 +29,8 @@ msgstr "Русский"
 
 #: task_manager/templates/index.html:9
 msgid "Hello from Hexlet!"
-msgstr "Привет от Хекслет!"
+msgstr "Привет от Хекслетa!"
 
 #: task_manager/templates/layout.html:12
 msgid "Hexlet Task Manager"
-msgstr "Менеджер задач Хекслет"
+msgstr "Менеджер задач Hexlet"

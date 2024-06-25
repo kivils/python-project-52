@@ -1,0 +1,29 @@
+{% extends './layout.html' %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+{% trans "Login" %}
+{% endblock %}
+
+{% block content %}
+<div class="container wrapper flex-grow-1">
+	<h1 class="my-4">
+        Вход
+	</h1>
+
+<form method="post">
+<input type="hidden" name="csrfmiddlewaretoken" value="1kjUHNbrnHzGcOk62ltaRFhhDZ1YVyq5bENbz2MX1eYguq4cpaRSXGr8Wde1MQwt">
+<div class="mb-3">
+	<label class="form-label" for="id_username">Имя пользователя</label>
+	<div style="position: absolute; display: flex; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px; background: no-repeat; visibility: visible; user-select: none; pointer-events: none; z-index: auto; opacity: 1;"></div>
+	<input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="form-control" placeholder="Имя пользователя" required="" id="id_username"></div>
+	<div class="mb-3">
+		<label class="form-label" for="id_password">Пароль</label>
+		<div style="position: absolute; display: flex; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px; background: no-repeat; visibility: visible; user-select: none; pointer-events: none; z-index: auto; opacity: 1;"></div>
+		<input type="password" name="password" autocomplete="current-password" class="form-control" placeholder="Пароль" required="" id="id_password"></div>
+  <input class="btn btn-primary" type="submit" value="Войти">
+</form>
+
+  </div>
+{% endblock %}
