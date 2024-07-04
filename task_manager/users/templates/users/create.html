@@ -1,9 +1,0 @@
-{% extends 'python-project-52/task_manager/templates/users/create.html' %}
-{% load i18n %}
-{% load django_bootstrap5 %}
-
-{% block page_header %}{% trans "Registration" %}{% endblock %}
-{% block button %}
-    {% trans "Register" as button_text %}
-    {% bootstrap_button button_class="btn btn-warning shadow-sm" button_type="submit" content=button_text %}
-{% endblock %}
