@@ -23,6 +23,6 @@ urlpatterns = [
     path('tz_detect/', include('tz_detect.urls')),
     path('', views.IndexView.as_view(), name='index'),
     path('users/', include('task_manager.users.urls')),
-    path('login/', views.login_user, name='login'),
+    path('login/', views.LoginUser.as_view(), name='login'),
     path('logout/', views.logout_user, name='logout'),
 ]

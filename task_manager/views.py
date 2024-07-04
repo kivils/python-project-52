@@ -1,6 +1,6 @@
 # from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 # from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -9,16 +9,22 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 # from django.utils.translation import gettext_lazy as _
 from task_manager.users.forms import LoginUserForm
-# from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView
 
 
 class IndexView(TemplateView):
     template_name = 'index.html'
 
 
-# class TaskManagerLoginView(SuccessMessageMixin, LoginView):
-#     template_name = 'login.html'
-#     success_message = _('You are logged in.')
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'login.html'
+    extra_context = {'title': "Авторизация"}
+
+    def get_success_url(self):
+        return reverse_lazy('index')
+
+
 def login_user(request):
     if request.method == 'POST':
         form = LoginUserForm(request.POST)
