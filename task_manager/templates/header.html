@@ -12,9 +12,18 @@
 	  </ul>
 	  <ul class="navbar-nav">
 		{% if user.is_authenticated %}
-		<li class="nav-item">
-			<a class="nav-link" href="{% url 'logout' %}">Выйти</a>
-		</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}">Статусы</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}">Метки</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}">Задачи</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}">Выход</a>
+			</li>
 		{% else %}
 		<li class="nav-item">
 			<a class="nav-link" href="{% url 'login' %}">Вход</a>
