@@ -1,14 +1,15 @@
 from django.contrib.auth import get_user_model
-# , update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash
+# , login, authenticate
 # from django.forms import Form
 from django.shortcuts import render
 from django.urls import reverse_lazy
-# from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from task_manager.users.forms import UserCreateForm
-# from task_manager.users.mixins import UserCreatorOnlyMixin
+from task_manager.users.mixins import UserCreatorOnlyMixin
 from task_manager.view_mixins import (
     # CreateViewMixin,
-    # UpdateViewMixin,
+    UpdateViewMixin,
     # DeleteViewMixin,
     IndexViewMixin
 )
@@ -25,28 +26,37 @@ class UsersIndexView(UsersAbstractMixin, IndexViewMixin):
     context_object_name = 'users'
 
 
-# class UserCreateView(UsersAbstractMixin, CreateViewMixin):
-#     success_url = reverse_lazy('login')
-#     template_name = 'users/create.html'
-#     success_message = _('User has been registered successfully.')
+class UserCreateView():
+    success_url = reverse_lazy('login')
+    template_name = 'users/create.html'
+    success_message = _('User has been registered successfully.')
+
 
 def register_user(request):
-    form = UserCreateForm()
+    if request.method == 'POST':
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password1'])
+            new_user.save()
+            return render(request, 'index.html')
+    else:
+        form = UserCreateForm()
     return render(request, 'users/create.html', {'form': form})
 
 
 # def logout_user(request):
 #     logout(request)
 #     return HttpResponseRedirect(reverse('login'))
-# class UserUpdateView(UserCreatorOnlyMixin, UsersAbstractMixin,
-#                      UpdateViewMixin):
-#     template_name = 'users/update.html'
-#     success_message = _('User has been updated successfully.')
+class UserUpdateView(UserCreatorOnlyMixin, UsersAbstractMixin,
+                     UpdateViewMixin):
+    template_name = 'users/update.html'
+    success_message = _('User has been updated successfully.')
 
-#     def form_valid(self, form):
-#         response = super().form_valid(form)
-#         update_session_auth_hash(self.request, form.instance)
-#         return response
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        update_session_auth_hash(self.request, form.instance)
+        return response
 
 
 # class UserDeleteView(UserCreatorOnlyMixin, UsersAbstractMixin,

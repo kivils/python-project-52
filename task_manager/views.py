@@ -28,6 +28,7 @@ class LoginUser(LoginView):
 def login_user(request):
     if request.method == 'POST':
         form = LoginUserForm(request.POST)
+        print('fhfhfhhfhf')
         if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(request, username=cd['username'],
