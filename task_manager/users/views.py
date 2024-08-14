@@ -3,7 +3,8 @@ from django.contrib.auth import update_session_auth_hash
 # , login, authenticate
 # from django.forms import Form
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
 from task_manager.users.forms import UserCreateForm
 from task_manager.users.mixins import UserCreatorOnlyMixin
@@ -39,7 +40,7 @@ def register_user(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password1'])
             new_user.save()
-            return render(request, 'index.html')
+            return HttpResponseRedirect(reverse('login'))
     else:
         form = UserCreateForm()
     return render(request, 'users/create.html', {'form': form})
