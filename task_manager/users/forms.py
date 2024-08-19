@@ -1,56 +1,50 @@
 from django.contrib.auth import get_user_model
-# from django.contrib.auth.forms import BaseUserCreationForm
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 
 
 class UserCreateForm(forms.ModelForm):
-    # first_name = forms.CharField(label='Имя', widget=forms.TextInput(
-    #                                  attrs={'class': 'form-input'}))
-    # last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(
-    #     attrs={'class': 'form-input'}))
-    # username = forms.CharField(label='Имя пользователя',
-    #                            widget=forms.TextInput(
-    #                                attrs={'class': 'form-input'}))
+    first_name = forms.CharField(label='Имя', widget=forms.TextInput(
+                                     attrs={'class': 'form-control',
+                                            'placeholder': 'Имя'}))
+    last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Фамилия'}))
+    username = forms.CharField(label='Имя пользователя',
+                               widget=forms.TextInput(
+                                   attrs={'class': 'form-control',
+                                          'placeholder': 'Имя пользователя'}),
+                               help_text='Обязательное поле. '
+                               'Не более 150 символов. Только буквы, цифры и '
+                               'символы @/./+/-/_.')
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(
-        attrs={'class': 'form-input'}))
+        attrs={'class': 'form-control', 'placeholder': 'Пароль'}),
+                                help_text='Ваш пароль должен содержать как '
+                                'минимум 3 символа.')
     password2 = forms.CharField(label='Повторите пароль',
                                 widget=forms.PasswordInput(
-                                    attrs={'class': 'form-input'}))
+                                    attrs={'class': 'form-control',
+                                           'placeholder': 'Пароль'}),
+                                help_text='Для подтверждения введите, '
+                                'пожалуйста, пароль ещё раз.')
 
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name')
-
-    def clean_password2(self):
-        cd = self.cleaned_data
-        if cd['password1'] != cd['password2']:
-            raise forms.ValidationError('Passwords don\'t match.')
-        return cd['password2']
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'username']
+        labels = {
+           'first_name': 'Имя',
+           'last_name': 'Фамилия',
+           'username': 'Имя пользователя',
+           }
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(
-        attrs={'class': 'form-input'}))
+    username = forms.CharField(label='Имя пользователя',
+                               widget=forms.TextInput(
+                                   attrs={'class': 'form-control',
+                                          'placeholder': 'Имя пользователя'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(
-        attrs={'class': 'form-input'}))
+        attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
 
     class Meta:
         model = get_user_model()
         fields = ['username', 'password']
-# class UserCreateForm(BaseUserCreationForm):
-#     class Meta:
-#         model = get_user_model()
-#         fields = [
-#             'first_name',
-#             'last_name',
-#             'username',
-#             'password1',
-#             'password2'
-#         ]
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields[
-#             self._meta.model.USERNAME_FIELD].widget.attrs.pop('autofocus')

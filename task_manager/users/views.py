@@ -1,19 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth import update_session_auth_hash
-# , login, authenticate
-# from django.forms import Form
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
 from task_manager.users.forms import UserCreateForm
-from task_manager.users.mixins import UserCreatorOnlyMixin
-from task_manager.view_mixins import (
-    # CreateViewMixin,
-    UpdateViewMixin,
-    # DeleteViewMixin,
-    IndexViewMixin
-)
+from task_manager.view_mixins import IndexViewMixin
 
 
 class UsersAbstractMixin:
@@ -33,6 +24,12 @@ class UserCreateView():
     success_message = _('User has been registered successfully.')
 
 
+# class UserUpdateView():
+#     success_url = reverse_lazy('index')
+#     template_name = 'users/update.html'
+#     success_message = _('User has been registered successfully.')
+
+
 def register_user(request):
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
@@ -46,29 +43,14 @@ def register_user(request):
     return render(request, 'users/create.html', {'form': form})
 
 
-# def logout_user(request):
-#     logout(request)
-#     return HttpResponseRedirect(reverse('login'))
-class UserUpdateView(UserCreatorOnlyMixin, UsersAbstractMixin,
-                     UpdateViewMixin):
-    template_name = 'users/update.html'
-    success_message = _('User has been updated successfully.')
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        update_session_auth_hash(self.request, form.instance)
-        return response
-
-
-# class UserDeleteView(UserCreatorOnlyMixin, UsersAbstractMixin,
-#                      DeleteViewMixin):
-#     template_name = 'users/delete.html'
-#     success_message = _('User has been deleted successfully.')
-#     failure_message = _('Cannot delete user because it is in use.')
-#     form_class = Form
-
-#     def post(self, request, *args, **kwargs):
-#         user = get_user_model().objects.get(pk=request.user.id)
-#         if user.tasks_author.first() or user.tasks_executor.first():
-#             self.have_dependencies = True
-#         return super().post(request, *args, **kwargs)
+# def update_user(request):
+#     if request.method == 'POST':
+#         form = UserUpdateView(request.POST)
+#         if form.is_valid():
+#             new_user = form.save(commit=False)
+#             new_user.set_password(form.cleaned_data['password1'])
+#             new_user.save()
+#             return HttpResponseRedirect(reverse('index'))
+#     else:
+#         form = UserUpdateView()
+#     return render(request, 'users/index.html', {'form': form})

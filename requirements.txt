@@ -41,7 +41,6 @@ flake8==7.0.0
 Flask==3.0.3
 gunicorn==22.0.0
 h11==0.14.0
-hexlet-code @ file:///home/olga/Projects/python-project-83/dist/hexlet_code-0.1.0-py3-none-any.whl#sha256=03ae7714e2cf03535f9467e50f755d021a2bee888023add59acafda0f5d3de02
 hexlet-python-package @ git+https://github.com/hexlet-boilerplates/python-package.git@ee822d242c86b51cb8069f03c31d4fdd0bd4f4ab
 httplib2==0.20.2
 i18n==0.2
