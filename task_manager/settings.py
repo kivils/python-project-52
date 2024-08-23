@@ -15,6 +15,7 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
+from django.contrib.messages import constants as messages
 
 load_dotenv()
 # DATABASE_URL = os.getenv("DATABASE_URL")
@@ -74,6 +75,13 @@ MIDDLEWARE = [
     'tz_detect.middleware.TimezoneMiddleware',
     'task_manager.rollbar_middleware.CustomRollbarNotifierMiddleware',
 ]
+
+MESSAGE_TAGS = {
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 ROOT_URLCONF = 'task_manager.urls'
 

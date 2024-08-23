@@ -23,19 +23,16 @@ class UsersIndexView(UsersAbstractMixin, IndexViewMixin):
 class UserCreateView():
     success_url = reverse_lazy('login')
     template_name = 'users/create.html'
-    success_message = _('User has been registered successfully.')
 
 
 class UserUpdateView():
     success_url = reverse_lazy('index')
     template_name = 'users/update.html'
-    success_message = _('User has been updated successfully.')
 
 
 class UserDeleteView():
     success_url = reverse_lazy('delete')
     template_name = 'users/delete.html'
-    success_message = _('User has been deleted successfully.')
 
 
 def register_user(request):
@@ -45,6 +42,8 @@ def register_user(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password1'])
             new_user.save()
+            messages.success(request,
+                             _('User has been registered successfully.'))
             return HttpResponseRedirect(reverse('login'))
     else:
         form = UserCreateForm()
@@ -58,6 +57,8 @@ def update_user(request, pk):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password1'])
             new_user.save()
+            messages.success(request,
+                             _('User has been updated successfully.'))
             return HttpResponseRedirect(reverse('index',
                                                 kwargs={'pk':   new_user.id}))
     else:
@@ -65,6 +66,9 @@ def update_user(request, pk):
         # user = User.objects.get(id=pk)
         # print(user, 'userrr')
         # if request == user:
+        # messages.error(request,
+        #                _('You do not have permission to'
+        #                  ' change another user.'))
         form = UserCreateForm()
     return render(request, 'users/update.html', {'form': form})
 
@@ -72,12 +76,12 @@ def update_user(request, pk):
 def delete_user(request, pk):
     if request.method == 'POST':
         form = UserDeleteForm(request.POST)
-        print(form.is_valid(), 'fijfiejfijfifjifj')
         if form.is_valid():
             user = request.user
             logout(request)
             user.delete()
-            messages.success(request, 'Account successfully deleted')
+            messages.success(request,
+                             _('User has been deleted successfully.'))
             return HttpResponseRedirect(reverse('index'))
     else:
         form = UserDeleteForm()

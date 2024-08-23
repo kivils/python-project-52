@@ -23,15 +23,9 @@
 					<td class="align-middle">{{ person.date_joined|date:'d.m.Y H:i' }}</td>
 					<td class="align-middle">
 						{% if user.is_authenticated %}
-							{% if user.id == person.id %}
-								<a href="/users/{{ person.id }}/update/">Изменить</a>
-								<br>
-								<a href="/users/{{ person.id }}/delete/">Удалить</a>
-							{% else %}
-								<a href="/users/">Изменить</a>
-								<br>
-								<a href="/users/">Удалить</a>
-							{% endif %}
+							<a href="/users/{{ person.id }}/update/">Изменить</a>
+							<br>
+							<a href="/users/{{ person.id }}/delete/">Удалить</a>
 						{% else %}
 							<a href="/login/">Изменить</a>
 							<br>
