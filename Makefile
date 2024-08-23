@@ -16,5 +16,5 @@ publish:
 package-install:
 	python3 -m pip install --user dist/*.whl
 
-# lint:
-# 	poetry run flake8 brain_games
+lint:
+	poetry run flake8 task_manager

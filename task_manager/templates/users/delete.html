@@ -5,12 +5,13 @@
 {% block page_header %}{% endblock %}
 
 {% block content %}
-    <div class="container-fluid p-4 shadow rounded bg-light">
-    <p>{% trans "Are you sure you want delete" %} <span style="font-weight: bold">"{{ object }}"</span>?</p>
-    <form method="post">
-        {% csrf_token %}
-        {% trans "Yes, delete" as button_text %}
-        <input class="btn btn-danger shadow-sm" type="submit" value="{{ button_text }}">
-    </form>
-    </div>
+<div class="container wrapper flex-grow-1">
+	<h1 class="my-4">Удаление пользователя</h1>	
+	<p>Вы уверены, что хотите удалить {{ user.get_full_name }}?</p>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input class="btn btn-danger" type="submit" value="Да, удалить">
+	</form>
+  </div>
 {% endblock %}
