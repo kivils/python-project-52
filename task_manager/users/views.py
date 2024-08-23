@@ -62,13 +62,18 @@ def update_user(request, pk):
             return HttpResponseRedirect(reverse('index',
                                                 kwargs={'pk':   new_user.id}))
     else:
-        if request.user.id != pk:
+        if not request.user.is_authenticated:
             messages.error(request,
-                           _('You do not have permission to'
-                             ' change another user.'))
-            return HttpResponseRedirect(reverse('users'))
+                           _('You are not authorized please login.'))
+            return HttpResponseRedirect(reverse('login'))
         else:
-            form = UserCreateForm()
+            if request.user.id != pk:
+                messages.error(request,
+                               _('You do not have permission to'
+                                 ' change another user.'))
+                return HttpResponseRedirect(reverse('users'))
+            else:
+                form = UserCreateForm()
     return render(request, 'users/update.html', {'form': form})
 
 
@@ -83,5 +88,16 @@ def delete_user(request, pk):
                              _('User has been deleted successfully.'))
             return HttpResponseRedirect(reverse('index'))
     else:
-        form = UserDeleteForm()
+        if not request.user.is_authenticated:
+            messages.error(request,
+                           _('You are not authorized please login.'))
+            return HttpResponseRedirect(reverse('login'))
+        else:
+            if request.user.id != pk:
+                messages.error(request,
+                               _('You do not have permission to'
+                                 ' change another user.'))
+                return HttpResponseRedirect(reverse('users'))
+            else:
+                form = UserDeleteForm()
     return render(request, 'users/delete.html', {'form': form})
