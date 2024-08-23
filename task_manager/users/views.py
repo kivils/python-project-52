@@ -62,14 +62,13 @@ def update_user(request, pk):
             return HttpResponseRedirect(reverse('index',
                                                 kwargs={'pk':   new_user.id}))
     else:
-        # # if request == User.objects.get(id=user_id):
-        # user = User.objects.get(id=pk)
-        # print(user, 'userrr')
-        # if request == user:
-        # messages.error(request,
-        #                _('You do not have permission to'
-        #                  ' change another user.'))
-        form = UserCreateForm()
+        if request.user.id != pk:
+            messages.error(request,
+                           _('You do not have permission to'
+                             ' change another user.'))
+            return HttpResponseRedirect(reverse('users'))
+        else:
+            form = UserCreateForm()
     return render(request, 'users/update.html', {'form': form})
 
 
