@@ -7,6 +7,7 @@ from task_manager.users.forms import UserCreateForm, UserDeleteForm
 from task_manager.view_mixins import IndexViewMixin
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 
 class UsersAbstractMixin:
@@ -51,6 +52,7 @@ def register_user(request):
 
 
 def update_user(request, pk):
+    user = User.objects.get(id=pk)
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
@@ -60,7 +62,7 @@ def update_user(request, pk):
             messages.success(request,
                              _('User has been updated successfully.'))
             return HttpResponseRedirect(reverse('index',
-                                                kwargs={'pk':   new_user.id}))
+                                                kwargs={'pk': new_user.id}))
     else:
         if not request.user.is_authenticated:
             messages.error(request,
@@ -73,7 +75,7 @@ def update_user(request, pk):
                                  ' change another user.'))
                 return HttpResponseRedirect(reverse('users'))
             else:
-                form = UserCreateForm()
+                form = UserCreateForm(instance=user)
     return render(request, 'users/update.html', {'form': form})
 
 
