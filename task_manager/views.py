@@ -4,7 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from task_manager.users.forms import LoginUserForm
+# , LogoutUserForm
 from django.contrib.auth.views import LoginView
+# , LogoutView
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
@@ -21,6 +23,9 @@ class LoginUser(LoginView):
     def get_success_url(self):
         messages.success(self.request, _('You are logged in'))
         return reverse_lazy('index')
+
+
+# class LogoutUser(LogoutUser):
 
 
 def login_user(request):

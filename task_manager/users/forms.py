@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
-class UserCreateForm(forms.ModelForm):
+class UserCreateForm(UserCreationForm):
     first_name = forms.CharField(label='Имя', required=True,
                                  widget=forms.TextInput(
                                      attrs={'class': 'form-control',
@@ -54,6 +54,11 @@ class LoginUserForm(AuthenticationForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'password']
+
+
+class LogoutUserForm():
+    class Meta:
+        model = get_user_model()
 
 
 class UserDeleteForm(forms.ModelForm):

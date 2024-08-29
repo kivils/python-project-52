@@ -19,8 +19,8 @@ from task_manager import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("i18n/", include("django.conf.urls.i18n")),
-    path('tz_detect/', include('tz_detect.urls')),
+    # path("i18n/", include("django.conf.urls.i18n")),
+    # path('tz_detect/', include('tz_detect.urls')),
     path('', views.IndexView.as_view(), name='index'),
     path('users/', include('task_manager.users.urls')),
     path('login/', views.LoginUser.as_view(), name='login'),
