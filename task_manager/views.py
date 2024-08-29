@@ -3,10 +3,8 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from task_manager.users.forms import LoginUserForm
-# , LogoutUserForm
-from django.contrib.auth.views import LoginView
-# , LogoutView
+from task_manager.users.forms import LoginUserForm, LogoutUserForm
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
@@ -25,7 +23,14 @@ class LoginUser(LoginView):
         return reverse_lazy('index')
 
 
-# class LogoutUser(LogoutUser):
+class LogoutUser(LogoutView):
+    success_url = reverse_lazy('index')
+    form_class = LogoutUserForm
+    template_name = 'login.html'
+
+    def get_success_url(self):
+        messages.info(self.request, _('You are logged out'))
+        return reverse_lazy('login')
 
 
 def login_user(request):
