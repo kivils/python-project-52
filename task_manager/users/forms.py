@@ -56,11 +56,6 @@ class LoginUserForm(AuthenticationForm):
         fields = ['username', 'password']
 
 
-class LogoutUserForm():
-    class Meta:
-        model = get_user_model()
-
-
 class UserDeleteForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
