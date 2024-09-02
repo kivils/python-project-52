@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from task_manager.users.forms import UserCreateForm, UserDeleteForm
 from task_manager.view_mixins import IndexViewMixin
 # , CreateViewMixin
+from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -22,9 +23,14 @@ class UsersIndexView(UsersAbstractMixin, IndexViewMixin):
     context_object_name = 'users'
 
 
-class UserCreateView():
-    success_url = reverse_lazy('login')
+class UserCreateView(CreateView):
+    form_class = UserCreateForm
     template_name = 'users/create.html'
+
+    def get_success_url(self):
+        messages.success(self.request,
+                         _('User has been registered successfully.'))
+        return reverse_lazy('login')
 
 
 class UserUpdateView():
@@ -35,21 +41,6 @@ class UserUpdateView():
 class UserDeleteView():
     success_url = reverse_lazy('delete')
     template_name = 'users/delete.html'
-
-
-def register_user(request):
-    if request.method == 'POST':
-        form = UserCreateForm(request.POST)
-        if form.is_valid():
-            new_user = form.save(commit=False)
-            new_user.set_password(form.cleaned_data['password1'])
-            new_user.save()
-            messages.success(request,
-                             _('User has been registered successfully.'))
-            return HttpResponseRedirect(reverse('login'))
-    else:
-        form = UserCreateForm()
-    return render(request, 'users/create.html', {'form': form})
 
 
 def update_user(request, pk):
