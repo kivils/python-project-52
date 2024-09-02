@@ -3,12 +3,14 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
-from task_manager.users.forms import UserCreateForm, UserDeleteForm
+from task_manager.users.forms import UserCreateForm
+# , UserDeleteForm
 from task_manager.view_mixins import IndexViewMixin
 # , CreateViewMixin
-from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, DeleteView
 from django.contrib import messages
-from django.contrib.auth import logout
+# from django.contrib.auth import logout
 from django.contrib.auth.models import User
 
 
@@ -38,9 +40,25 @@ class UserUpdateView():
     template_name = 'users/update.html'
 
 
-class UserDeleteView():
-    success_url = reverse_lazy('delete')
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    model = get_user_model()
+    login_url = '/login/'
     template_name = 'users/delete.html'
+
+    def get(self, request, pk):
+        if pk != self.request.user.id:
+            messages.error(request,
+                           _('You do not have permission to'
+                             ' change another user.'))
+            return HttpResponseRedirect(reverse('users'))
+        else:
+            return render(request, 'users/delete.html')
+
+    # не работает, это исправить
+    def get_success_url(self):
+        # messages.success(self.request,
+        #                  _('User has been deleted successfully.'))
+        return HttpResponseRedirect(reverse('index'))
 
 
 def update_user(request, pk):
@@ -71,27 +89,27 @@ def update_user(request, pk):
     return render(request, 'users/update.html', {'form': form})
 
 
-def delete_user(request, pk):
-    if request.method == 'POST':
-        form = UserDeleteForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            logout(request)
-            user.delete()
-            messages.success(request,
-                             _('User has been deleted successfully.'))
-            return HttpResponseRedirect(reverse('index'))
-    else:
-        if not request.user.is_authenticated:
-            messages.error(request,
-                           _('You are not authorized please login.'))
-            return HttpResponseRedirect(reverse('login'))
-        else:
-            if request.user.id != pk:
-                messages.error(request,
-                               _('You do not have permission to'
-                                 ' change another user.'))
-                return HttpResponseRedirect(reverse('users'))
-            else:
-                form = UserDeleteForm()
-    return render(request, 'users/delete.html', {'form': form})
+# def delete_user(request, pk):
+#     if request.method == 'POST':
+#         form = UserDeleteForm(request.POST)
+#         if form.is_valid():
+#             user = request.user
+#             logout(request)
+#             user.delete()
+#             messages.success(request,
+#                              _('User has been deleted successfully.'))
+#             return HttpResponseRedirect(reverse('index'))
+#     else:
+#         if not request.user.is_authenticated:
+#             messages.error(request,
+#                            _('You are not authorized please login.'))
+#             return HttpResponseRedirect(reverse('login'))
+#         else:
+#             if request.user.id != pk:
+#                 messages.error(request,
+#                                _('You do not have permission to'
+#                                  ' change another user.'))
+#                 return HttpResponseRedirect(reverse('users'))
+#             else:
+#                 form = UserDeleteForm()
+#     return render(request, 'users/delete.html', {'form': form})
