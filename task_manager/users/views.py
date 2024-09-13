@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
 from task_manager.users.forms import UserCreateForm, UserUpdateForm
 from task_manager.view_mixins import IndexViewMixin
-# , CreateViewMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib import messages
