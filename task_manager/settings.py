@@ -50,8 +50,8 @@ CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000"]
 INSTALLED_APPS = [
     'tz_detect',
     'task_manager',
-    # 'task_manager.users',
     'task_manager.users.apps.UsersConfig',
+    'task_manager.statuses.apps.StatusesConfig',
     'dj_database_url',
     'django_bootstrap5',
     'django.contrib.admin',

@@ -1,0 +1,33 @@
+{% extends '../index.html' %}
+{% load i18n %}
+
+{% block content %}
+	<h1 class="my-4">Статусы</h1>
+	<a class="btn btn-primary mb-3" href="/statuses/{{ status.id }}/create/">Создать статус</a>
+	<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>Имя</th>
+		<th>Дата создания</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+		<tbody class="table-group-divider">
+			{% for status in statuses %}
+				<tr>
+					<td class="align-middle text-center">{{ status.id }}</td>
+					<td class="align-middle">{{ status.name }}</td>
+					<td class="align-middle">{{ status.date_joined|date:'d.m.Y H:i' }}</td>
+					<td class="align-middle">
+						<a href="/users/{{ status.id }}/update/">Изменить</a>
+						<br>
+						<a href="/users/{{ status.id }}/delete/">Удалить</a>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+	</tbody>
+	</table>
+{% endblock %}
