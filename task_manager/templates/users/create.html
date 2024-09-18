@@ -5,16 +5,10 @@
 {% block page_header %}{% endblock %}
 
 {% block content %}
-<h1 class="my-4">
-
-Регистрация
-
-</h1>
-
-<form method="post">
-{% csrf_token %}
-{{ form.as_p }}
-	<input class="btn btn-primary" type="submit" value="Зарегистрировать">
-</form>
-
+	<h1 class="my-4">Регистрация</h1>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input class="btn btn-primary" type="submit" value="Зарегистрировать">
+	</form>
 {% endblock %}

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'task_manager',
     'task_manager.users.apps.UsersConfig',
     'task_manager.statuses.apps.StatusesConfig',
+    # 'task_manager.lables.apps.StatusesConfig',
     'dj_database_url',
     'django_bootstrap5',
     'django.contrib.admin',

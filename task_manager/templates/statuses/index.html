@@ -3,7 +3,7 @@
 
 {% block content %}
 	<h1 class="my-4">Статусы</h1>
-	<a class="btn btn-primary mb-3" href="/statuses/{{ status.id }}/create/">Создать статус</a>
+	<a class="btn btn-primary mb-3" href="/statuses/create/">Создать статус</a>
 	<table class="table table-striped">
 	<thead>
 	<tr>
@@ -19,7 +19,7 @@
 				<tr>
 					<td class="align-middle text-center">{{ status.id }}</td>
 					<td class="align-middle">{{ status.name }}</td>
-					<td class="align-middle">{{ status.date_joined|date:'d.m.Y H:i' }}</td>
+					<td class="align-middle">{{ status.created_at|date:'d.m.Y H:i' }}</td>
 					<td class="align-middle">
 						<a href="/users/{{ status.id }}/update/">Изменить</a>
 						<br>
