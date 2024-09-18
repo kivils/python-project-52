@@ -21,9 +21,9 @@
 					<td class="align-middle">{{ status.name }}</td>
 					<td class="align-middle">{{ status.created_at|date:'d.m.Y H:i' }}</td>
 					<td class="align-middle">
-						<a href="/users/{{ status.id }}/update/">Изменить</a>
+						<a href="/statuses/{{ status.id }}/update/">Изменить</a>
 						<br>
-						<a href="/users/{{ status.id }}/delete/">Удалить</a>
+						<a href="/statuses/{{ status.id }}/delete/">Удалить</a>
 					</td>
 				</tr>
 			{% endfor %}

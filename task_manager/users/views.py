@@ -22,8 +22,7 @@ class UsersIndexView(UsersAbstractMixin, IndexViewMixin):
     context_object_name = 'users'
 
 
-class UserCreateView(CreateView):
-    form_class = UserCreateForm
+class UserCreateView(UsersAbstractMixin, CreateView):
     template_name = 'users/create.html'
 
     def get_success_url(self):

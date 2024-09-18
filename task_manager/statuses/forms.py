@@ -2,7 +2,7 @@ from django import forms
 from .models import Statuses
 
 
-class StatusCreateForm(forms.ModelForm):
+class StatusForm(forms.ModelForm):
     name = forms.CharField(label='Имя', required=True,
                                  max_length=100,
                                  widget=forms.TextInput(
