@@ -1,6 +1,6 @@
 from django.test import TestCase, override_settings
 from django.urls import reverse, resolve
-from task_manager.statuses.views import (
+from ..views import (
     StatusIndexView,
     StatusCreateView,
     StatusUpdateView,
@@ -11,8 +11,7 @@ from task_manager.statuses.views import (
 @override_settings(
     SECRET_KEY='fake-key',
 )
-class StatusUrlTest(TestCase):
-
+class StatusUrlsTest(TestCase):
     def test_status_index_url(self):
         url = reverse('statuses')
         self.assertEqual(resolve(url).func.view_class, StatusIndexView)
