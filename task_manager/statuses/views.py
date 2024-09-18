@@ -18,8 +18,7 @@ class StatusesIndexView(StatusAbstractMixin, ListView):
     context_object_name = 'statuses'
 
 
-class StatusCreateView(CreateView):
-    form_class = StatusCreateForm
+class StatusCreateView(StatusAbstractMixin, CreateView):
     template_name = 'statuses/create.html'
 
     def get_success_url(self):

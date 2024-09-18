@@ -10,5 +10,5 @@ class StatusCreateForm(forms.ModelForm):
                                             'placeholder': 'Имя'}))
 
     class Meta:
-        model = Statuses()
+        model = Statuses
         fields = ['name']
