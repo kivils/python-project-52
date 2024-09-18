@@ -4,16 +4,18 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import Statuses
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from task_manager.access_mixins import LoginRequireMixin
 from django.views.generic import ListView
 
 
-class StatusAbstractMixin:
+class StatusAbstractMixin(LoginRequireMixin):
     model = Statuses
+    login_url = "/login/"
     success_url = reverse_lazy('statuses')
     form_class = StatusForm
 
 
-class StatusesIndexView(StatusAbstractMixin, ListView):
+class StatusIndexView(StatusAbstractMixin, ListView):
     template_name = 'statuses/index.html'
     context_object_name = 'statuses'
 
@@ -36,8 +38,9 @@ class StatusUpdateView(StatusAbstractMixin, UpdateView):
         return reverse_lazy('statuses')
 
 
-class StatusDeleteView(DeleteView):
+class StatusDeleteView(LoginRequireMixin, DeleteView):
     model = Statuses
+    login_url = "/login/"
     template_name = 'statuses/delete.html'
 
     def get_success_url(self):
