@@ -3,7 +3,7 @@ from .forms import StatusForm
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .models import Statuses
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 
 
@@ -33,4 +33,14 @@ class StatusUpdateView(StatusAbstractMixin, UpdateView):
     def get_success_url(self):
         messages.success(self.request,
                          _('Status has been updated successfully.'))
+        return reverse_lazy('statuses')
+
+
+class StatusDeleteView(DeleteView):
+    model = Statuses
+    template_name = 'statuses/delete.html'
+
+    def get_success_url(self):
+        messages.success(self.request,
+                         _('Status has been deleted successfully.'))
         return reverse_lazy('statuses')
