@@ -1,3 +1,4 @@
+# flake8: noqa: F501
 """
 Django settings for task_manager project.
 

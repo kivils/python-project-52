@@ -17,7 +17,7 @@ package-install:
 	python3 -m pip install --user dist/*.whl
 
 lint:
-	poetry run flake8 task_manager
+	poetry run flake8 task_manager --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,*/migrations
 
 test:
 	poetry run pytest --cov=task_manager
