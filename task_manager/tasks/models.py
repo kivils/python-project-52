@@ -1,5 +1,6 @@
 from django.db import models
 from task_manager.statuses.models import Statuses
+from task_manager.labels.models import Label
 from django.contrib.auth import get_user_model
 
 
@@ -12,4 +13,6 @@ class Task(models.Model):
     executor = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,
                                  null=True, blank=True,
                                  related_name='tasks_executor')
+    labels = models.ForeignKey(Label, on_delete=models.PROTECT, null=True,
+                               blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
