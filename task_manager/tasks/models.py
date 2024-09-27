@@ -5,14 +5,24 @@ from django.contrib.auth import get_user_model
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    description = models.TextField(null=True, blank=True)
-    status = models.ForeignKey(Statuses, on_delete=models.PROTECT)
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        null=False, blank=False,
+        verbose_name='Имя',
+    )
+    description = models.CharField(verbose_name='Описание',
+                                   unique=False,
+                                   null=True, blank=True)
+    status = models.ForeignKey(Statuses,
+                               on_delete=models.PROTECT,
+                               verbose_name='Статус', unique=False)
     author = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,
                                related_name='tasks_author')
     executor = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,
                                  null=True, blank=True,
-                                 related_name='tasks_executor')
-    labels = models.ForeignKey(Label, on_delete=models.PROTECT, null=True,
-                               blank=True)
+                                 related_name='tasks_executor',
+                                 verbose_name='Исполнитель')
+    labels = models.ManyToManyField(Label, verbose_name='Метки',
+                                    blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
