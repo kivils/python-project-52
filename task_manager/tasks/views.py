@@ -23,10 +23,15 @@ class TaskIndexView(TaskAbstractMixin, ListView):
 class TaskCreateView(TaskAbstractMixin, CreateView):
     template_name = 'tasks/create.html'
 
-    def get_success_url(self):
-        messages.success(self.request,
-                         _('Tasks has been created successfully.'))
-        return reverse_lazy('tasks')
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.author = self.request.user
+        return super().form_valid(form)
+
+    # def get_success_url(self):
+    #     messages.success(self.request,
+    #                      _('Tasks has been created successfully.'))
+    #     return reverse_lazy('tasks')
 
 
 class TaskUpdateView(TaskAbstractMixin, UpdateView):

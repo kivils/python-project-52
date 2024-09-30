@@ -37,24 +37,22 @@
 		<th></th>
 	</tr>
 	</thead>
-	<tbody>
-		<tbody class="table-group-divider">
-			{% for task in tasks %}
-				<tr>
-					<td class="align-middle text-center">{{ task.id }}</td>
-					<td class="align-middle">{{ task.name }}</td>
-                    <td class="align-middle">{{ task.name }}</td>
-                    <td class="align-middle">{{ task.name }}</td>
-                    <td class="align-middle">{{ task.name }}</td>
-					<td class="align-middle">{{ task.created_at|date:'d.m.Y H:i' }}</td>
-					<td class="align-middle">
-						<a href="/tasks/{{ task.id }}/update/">Изменить</a>
-						<br>
-						<a href="/tasks/{{ task.id }}/delete/">Удалить</a>
-					</td>
-				</tr>
-			{% endfor %}
-			</tbody>
-	</tbody>
+    <tbody class="table-group-divider">
+        {% for task in tasks %}
+            <tr>
+                <td class="align-middle text-center">{{ task.id }}</td>
+                <td class="align-middle">{{ task.name }}</td>
+                <td class="align-middle">{{ task.status }}</td>
+                <td class="align-middle">{{ task.author.get_full_name }}</td>
+                <td class="align-middle">{{ task.executor.get_full_name }}</td>
+                <td class="align-middle">{{ task.created_at|date:'d.m.Y H:i' }}</td>
+                <td class="align-middle">
+                    <a href="/tasks/{{ task.id }}/update/">Изменить</a>
+                    <br>
+                    <a href="/tasks/{{ task.id }}/delete/">Удалить</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
 	</table>
 {% endblock %}

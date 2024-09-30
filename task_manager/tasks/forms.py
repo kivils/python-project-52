@@ -28,3 +28,6 @@ class TaskForm(forms.ModelForm):
             'executor': forms.Select(attrs={'class': 'form-select'}),
             'labels': forms.SelectMultiple(attrs={'class': 'form-select'})
         }
+
+
+# исчез столбец в дб с метками, изменить вид исполнителя
