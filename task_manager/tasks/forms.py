@@ -11,7 +11,9 @@ class CustomChoiceField(forms.ModelChoiceField):
 class TaskForm(forms.ModelForm):
     executor = CustomChoiceField(
         queryset=get_user_model().objects.all(),
-        required=False
+        label='Исполнитель',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select'})
     )
 
     class Meta:
@@ -25,9 +27,8 @@ class TaskForm(forms.ModelForm):
                                              'placeholder': 'Описание',
                                              "rows": 10, "cols": 20}),
             'status': forms.Select(attrs={'class': 'form-select'}),
-            'executor': forms.Select(attrs={'class': 'form-select'}),
             'labels': forms.SelectMultiple(attrs={'class': 'form-select'})
         }
 
 
-# исчез столбец в дб с метками, изменить вид исполнителя
+# исчез столбец в дб с метками

@@ -21,8 +21,7 @@ class Task(models.Model):
                                related_name='tasks_author')
     executor = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,
                                  null=True, blank=True,
-                                 related_name='tasks_executor',
-                                 verbose_name='Исполнитель')
+                                 related_name='tasks_executor')
     labels = models.ManyToManyField(Label, verbose_name='Метки',
                                     blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
