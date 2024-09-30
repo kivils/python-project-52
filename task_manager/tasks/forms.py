@@ -29,6 +29,3 @@ class TaskForm(forms.ModelForm):
             'status': forms.Select(attrs={'class': 'form-select'}),
             'labels': forms.SelectMultiple(attrs={'class': 'form-select'})
         }
-
-
-# исчез столбец в дб с метками
