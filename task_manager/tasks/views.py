@@ -1,10 +1,10 @@
 from .models import Task
-from django.urls import reverse_lazy
 from task_manager.access_mixins import LoginRequireMixin
 from .forms import TaskForm
 from django.views.generic import ListView
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.contrib import messages
 
 
@@ -28,10 +28,10 @@ class TaskCreateView(TaskAbstractMixin, CreateView):
         instance.author = self.request.user
         return super().form_valid(form)
 
-    # def get_success_url(self):
-    #     messages.success(self.request,
-    #                      _('Tasks has been created successfully.'))
-    #     return reverse_lazy('tasks')
+    def get_success_url(self):
+        messages.success(self.request,
+                         _('Tasks has been created successfully.'))
+        return reverse_lazy('tasks')
 
 
 class TaskUpdateView(TaskAbstractMixin, UpdateView):

@@ -18,7 +18,8 @@ class LoginUser(LoginView):
     def get_success_url(self):
         messages.success(self.request, _('You are logged in'))
         return reverse_lazy('index')
-
+## сделать так, чтобы текст под строкой пароль был с точечкой и все подсказки под строками было серого цвета
+## сделать все подсказки, которые всполывают после регистрации выхода и тп на русском.
 
 class LogoutUser(LogoutView):
     def get_success_url(self):
