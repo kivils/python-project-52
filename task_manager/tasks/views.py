@@ -1,7 +1,8 @@
 from .models import Task
 from task_manager.access_mixins import LoginRequireMixin
 from .forms import TaskForm
-from django.views.generic import ListView
+from .filter import TaskFilter
+from django_filters.views import FilterView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -15,9 +16,11 @@ class TaskAbstractMixin(LoginRequireMixin):
     form_class = TaskForm
 
 
-class TaskIndexView(TaskAbstractMixin, ListView):
+class TaskIndexView(FilterView):
+    model = Task
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
+    filter_set = TaskFilter
 
 
 class TaskCreateView(TaskAbstractMixin, CreateView):
