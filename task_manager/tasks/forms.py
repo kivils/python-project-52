@@ -1,15 +1,11 @@
 from django import forms
+import django_filters
 from .models import Task
 from django.contrib.auth import get_user_model
 
 
-class CustomChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        return f'{obj.get_full_name()}'
-
-
 class TaskForm(forms.ModelForm):
-    executor = CustomChoiceField(
+    executor = django_filters.ModelChoiceFilter(
         queryset=get_user_model().objects.all(),
         label='Исполнитель',
         required=False,
