@@ -22,8 +22,8 @@ class LabelUrlsTest(TestCase):
 
     def test_label_update_url(self):
         url = reverse('labels_update', kwargs={'pk': 1})
-        self.assertEqual(resolve(url).func.view_class, LabelDeleteView)
+        self.assertEqual(resolve(url).func.view_class, LabelUpdateView)
 
     def test_label_delete_url(self):
         url = reverse('labels_delete', kwargs={'pk': 1})
-        self.assertEqual(resolve(url).func.view_class, LabelUpdateView)
+        self.assertEqual(resolve(url).func.view_class, LabelDeleteView)

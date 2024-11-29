@@ -4,11 +4,14 @@
 {% block content %}
 	<h1 class="my-4">Задачи</h1>
 	<a class="btn btn-primary mb-3" href="/tasks/create/">Создать задачу</a>
-    <form method="get">
-		{% csrf_token %}
-		{{ filter.form.as_p }}
-		<input class="btn btn-primary" type="submit" value="Показать">
-	</form>
+    <div class="card mb-3">
+        <div class="card-body bg-light">
+            <form class="form-inline center" method="get">
+                {{ filter.form.as_p }}
+                <input class="btn btn-primary" type="submit" value="Показать">
+            </form>
+        </div>
+    </div>
 
 	<table class="table table-striped">
 	<thead>

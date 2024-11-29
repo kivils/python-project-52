@@ -21,6 +21,7 @@ class TaskIndexView(FilterView):
     model = Task
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
+    filterset_class = TaskFilter 
     filter_set = TaskFilter
 
 

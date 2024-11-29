@@ -2,30 +2,42 @@ import django_filters
 from django import forms
 from .models import Task
 from task_manager.labels.models import Label
+from task_manager.statuses.models import Statuses
 from django.contrib.auth import get_user_model
 
 
 class TaskFilter(django_filters.FilterSet):
-    executor = django_filters.ModelMultipleChoiceFilter(
+    executor = django_filters.ModelChoiceFilter(
         queryset=get_user_model().objects.all(),
         label='Исполнитель',
         required=False,
-        # widget=forms.Select(attrs={'class': 'form-select'})
+        widget=forms.Select(attrs={'class': 'form-select'})
     )
-    labels = django_filters.ModelMultipleChoiceFilter(
+# пишет только имя, а я ожидаю еще ФАМИЛИЮ
+    labels = django_filters.ModelChoiceFilter(
         queryset=Label.objects.all(),
         label='Метки',
         required=False,
-        # widget=forms.SelectMultiple(attrs={'class': 'form-select'})
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+    status = django_filters.ModelChoiceFilter(
+        queryset=Statuses.objects.all(),
+        label='Статус',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
+    author = django_filters.BooleanFilter(
+        widget=forms.CheckboxInput(attrs={
+            'class': "form-check-input mr-3 is-valid"}),
+        label=("Только свои задачи"),
+        method="self_tasks",
     )
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'labels']
-        widgets = {
-            'executor': forms.Select(attrs={'class': 'form-select'}),
-            'status': forms.Select(attrs={'class': 'form-select'}),
-            # 'labels': forms.SelectMultiple(attrs={'class': 'form-select'}),
-            # 'users_tasks': forms.CheckboxInput(
-            #     attrs={'class': 'required checkbox form-control'}),
-        }
+        fields = ['status', 'executor', 'labels', 'author']
+    
+    def self_tasks(self, queryset, name, value):
+        if name == 'author' and value:
+            return queryset.filter(author__exact=self.request.user)
+        return queryset
