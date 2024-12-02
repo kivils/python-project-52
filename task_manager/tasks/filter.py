@@ -33,7 +33,6 @@ class TaskFilter(django_filters.FilterSet):
         widget=forms.Select(attrs={'class': 'form-select'})
     )
 
-# сделать кнопочку слева от текста
     author = django_filters.BooleanFilter(
         widget=forms.CheckboxInput(attrs={
             'class': "form-check-input mr-3"}),

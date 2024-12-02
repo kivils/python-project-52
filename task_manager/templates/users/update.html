@@ -5,13 +5,11 @@
 {% block page_header %}{% endblock %}
 {% block content %}
 <div class="container wrapper flex-grow-1">
-	<h1 class="my-4">
-		Изменение пользователя
-	</h1>
+	<h1 class="my-4">{% trans "User update" %}</h1>
 	<form method="post">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<input class="btn btn-primary" type="submit" value="Изменить">
+		<input class="btn btn-primary" type="submit" value="{% trans "Update" %}">
 	</form>
 </div>
 {% endblock %}

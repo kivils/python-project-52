@@ -42,6 +42,7 @@ class StatusDeleteView(LoginRequireMixin, DeleteView):
     model = Statuses
     login_url = "/login/"
     template_name = 'statuses/delete.html'
+    failure_message = _('Cannot delete status because it is in use.')
 
     def get_success_url(self):
         messages.success(self.request,

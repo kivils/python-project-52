@@ -26,4 +26,3 @@ class Task(models.Model):
                                     related_name='tasks',
                                     blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    # users_tasks = models.CheckConstraint()

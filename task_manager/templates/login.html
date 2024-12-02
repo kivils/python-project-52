@@ -7,14 +7,12 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="my-4">
-	Вход
-</h1>
+<h1 class="my-4">{% trans "Login" %}</h1>
 
 <form method="post">
 	{% csrf_token %}
 	{{ form.as_p }}
-	<input class="btn btn-primary" type="submit" value="Войти">
+	<input class="btn btn-primary" type="submit" value="{% trans "Login" %}">
 </form>
 
 {% endblock %}
