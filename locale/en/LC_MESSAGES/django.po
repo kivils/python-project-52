@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 09:13+0300\n"
+"POT-Creation-Date: 2024-12-02 15:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,22 +22,54 @@ msgstr ""
 msgid "You are not authorized! Please log in."
 msgstr ""
 
+#: task_manager/labels/views.py:28
+msgid "labels has been created successfully."
+msgstr ""
+
+#: task_manager/labels/views.py:39
+msgid "labels has been deleted successfully."
+msgstr ""
+
+#: task_manager/labels/views.py:48
+msgid "labels has been updated successfully."
+msgstr ""
+
 #: task_manager/mixins.py:8
 msgid ""
 "You do not have permission to edit\n"
 "                                  another user"
 msgstr ""
 
-#: task_manager/settings.py:145
+#: task_manager/settings.py:152
 msgid "English"
 msgstr ""
 
-#: task_manager/settings.py:146
+#: task_manager/settings.py:153
 msgid "Russian"
 msgstr ""
 
-#: task_manager/templates/index.html:8
-msgid "Hello from Hexlet!"
+#: task_manager/statuses/views.py:28
+msgid "Status has been created successfully."
+msgstr ""
+
+#: task_manager/statuses/views.py:37
+msgid "Status has been updated successfully."
+msgstr ""
+
+#: task_manager/statuses/views.py:48
+msgid "Status has been deleted successfully."
+msgstr ""
+
+#: task_manager/tasks/views.py:38
+msgid "Tasks has been created successfully."
+msgstr ""
+
+#: task_manager/tasks/views.py:47
+msgid "Tasks has been updated successfully."
+msgstr ""
+
+#: task_manager/tasks/views.py:58
+msgid "Tasks has been deleted successfully."
 msgstr ""
 
 #: task_manager/templates/layout.html:12
@@ -48,30 +80,81 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: task_manager/users/views.py:48
+#: task_manager/templates/tasks/detail.html:5
+#: task_manager/templates/tasks/detail.html:8
+msgid "Task view"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:20
+#: task_manager/templates/tasks/index.html:22
+msgid "Author"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:24
+#: task_manager/templates/tasks/index.html:23
+msgid "Executor"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:28
+#: task_manager/templates/tasks/index.html:21
+msgid "Status"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:32
+#: task_manager/templates/tasks/index.html:24
+msgid "Date created"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:37
+msgid "Labels"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:47
+#: task_manager/templates/tasks/index.html:38
+msgid "Change"
+msgstr ""
+
+#: task_manager/templates/tasks/detail.html:49
+#: task_manager/templates/tasks/index.html:40
+msgid "Delete"
+msgstr ""
+
+#: task_manager/templates/tasks/index.html:5
+msgid "Tasks"
+msgstr ""
+
+#: task_manager/templates/tasks/index.html:6
+msgid "Create task"
+msgstr ""
+
+#: task_manager/templates/tasks/index.html:20
+msgid "Name"
+msgstr ""
+
+#: task_manager/users/views.py:30
 msgid "User has been registered successfully."
 msgstr ""
 
-#: task_manager/users/views.py:64
-msgid "User has been updated successfully."
-msgstr ""
-
-#: task_manager/users/views.py:70 task_manager/users/views.py:96
-msgid "You are not authorized please login."
-msgstr ""
-
-#: task_manager/users/views.py:75 task_manager/users/views.py:101
+#: task_manager/users/views.py:45
 msgid "You do not have permission to change another user."
 msgstr ""
 
-#: task_manager/users/views.py:91
+#: task_manager/users/views.py:54
+msgid "User has been updated successfully."
+msgstr ""
+
+#: task_manager/users/views.py:66
+msgid "You do not have permission to delete another user."
+msgstr ""
+
+#: task_manager/users/views.py:74
 msgid "User has been deleted successfully."
 msgstr ""
 
-#: task_manager/views.py:22
+#: task_manager/views.py:19
 msgid "You are logged in"
 msgstr ""
 
-#: task_manager/views.py:32 task_manager/views.py:53
+#: task_manager/views.py:29
 msgid "You are logged out"
 msgstr ""
