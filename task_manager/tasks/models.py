@@ -16,7 +16,8 @@ class Task(models.Model):
                                    null=True, blank=True)
     status = models.ForeignKey(Statuses,
                                on_delete=models.PROTECT,
-                               verbose_name='Статус', unique=False)
+                               verbose_name='Статус', unique=False,
+                               related_name='tasks')
     author = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,
                                related_name='tasks_author')
     executor = models.ForeignKey(get_user_model(), on_delete=models.PROTECT,

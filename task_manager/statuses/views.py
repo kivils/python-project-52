@@ -6,6 +6,7 @@ from .models import Statuses
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from task_manager.access_mixins import LoginRequireMixin
 from django.views.generic import ListView
+from django.db import models
 
 
 class StatusAbstractMixin(LoginRequireMixin):
@@ -40,11 +41,32 @@ class StatusUpdateView(StatusAbstractMixin, UpdateView):
 
 class StatusDeleteView(LoginRequireMixin, DeleteView):
     model = Statuses
-    login_url = "/login/"
     template_name = 'statuses/delete.html'
-    failure_message = _('Cannot delete status because it is in use.')
+    login_url = reverse_lazy('statuses')
+    success_message = _('Status has been deleted successfully.')
 
-    def get_success_url(self):
-        messages.success(self.request,
-                         _('Status has been deleted successfully.'))
-        return reverse_lazy('statuses')
+    def post(self, request, *args, **kwargs):
+        if self.get_object().tasks.exists():
+            messages.error(
+                self.request,
+                _('Cannot delete status because it is in use.'))
+            return reverse_lazy('statuses')
+        return super().post(request, *args, **kwargs)
+# class StatusDeleteView(LoginRequireMixin, DeleteView):
+#     model = Statuses
+#     login_url = "/login/"
+#     template_name = 'statuses/delete.html'
+#     failure_message = _('Cannot delete status because it is in use.')
+
+#     def post(self, request, *args, **kwargs):
+#         try:
+#             return self.delete(request, *args, **kwargs)
+#         except models.ProtectedError:
+#             messages.error(request, 'Cannot delete status because it is in use.')
+#         finally:
+#             return reverse_lazy('statuses')
+
+#     def get_success_url(self):
+#         messages.success(self.request,
+#                          _('Status has been deleted successfully.'))
+#         return reverse_lazy('statuses')
