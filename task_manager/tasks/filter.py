@@ -43,7 +43,7 @@ class TaskFilter(django_filters.FilterSet):
     class Meta:
         model = Task
         fields = ['status', 'executor', 'labels', 'author']
-    
+
     def self_tasks(self, queryset, name, value):
         if name == 'author' and value:
             return queryset.filter(author__exact=self.request.user)
