@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 
 class UsersAbstractMixin:
@@ -60,14 +61,22 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     login_url = '/login/'
     template_name = 'users/delete.html'
 
-    def get(self, request, pk):
-        if pk != self.request.user.id:
-            messages.error(request,
-                           _('You do not have permission to'
-                             ' delete another user.'))
-            return HttpResponseRedirect(reverse('users'))
+    def post(self, request, pk):
+        user = self.get_object()
+
+        if user.tasks_author.exists() or user.tasks_executor.exists():
+            messages.error(request, _(
+                'Cannot delete user. User is associated with tasks.'))
+        elif pk != self.request.user.id:
+            messages.error(request, _(
+                'You do not have permission to delete another user.'))
         else:
-            return render(request, 'users/delete.html')
+            user.delete()
+            messages.success(request, _(
+                'User has been deleted successfully.'))
+            return redirect('index')
+
+        return redirect('users')
 
     def get_success_url(self):
         messages.success(self.request,

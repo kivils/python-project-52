@@ -6,7 +6,6 @@ from .models import Statuses
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from task_manager.access_mixins import LoginRequireMixin
 from django.views.generic import ListView
-# from django.db import models
 from django.shortcuts import redirect
 
 
@@ -53,3 +52,8 @@ class StatusDeleteView(LoginRequireMixin, DeleteView):
                 _('Cannot delete status because it is in use.'))
             return redirect('statuses')
         return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        messages.success(self.request,
+                         _('Status has been deleted successfully.'))
+        return reverse_lazy('statuses')
