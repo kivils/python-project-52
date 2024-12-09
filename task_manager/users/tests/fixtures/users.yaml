@@ -1,12 +1,12 @@
-- model: users.user
+- model: get_user_model()
   pk: 1
   fields:
     first_name: "Max"
-    last_name: "Smith"
+    last_name: "Payne"
     username: "max_payne"
     password: "pbkdf2_sha256$260000$piF1aYfgJxaqvSxUHZLoL8$F4e8/MkWQK54qD/MQ6Tx5iJH1Yq2fBNspLbOQELpJtU="
 
-- model: users.user
+- model: get_user_model()
   pk: 2
   fields:
     first_name: "Emma"

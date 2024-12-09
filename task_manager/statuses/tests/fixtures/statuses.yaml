@@ -1,9 +1,9 @@
-- model: statuses.status
+- model: statuses.statuses
   pk: 1
   fields:
     name: "In progress"
 
-- model: statuses.status
+- model: statuses.statuses
   pk: 2
   fields:
     name: "Finished"

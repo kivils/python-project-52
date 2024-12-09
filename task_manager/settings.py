@@ -19,7 +19,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.messages import constants as messages
 
 load_dotenv()
-# DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,6 +135,8 @@ AUTH_PASSWORD_VALIDATORS = [
         },
     },
 ]
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
 
 
 # Internationalization
