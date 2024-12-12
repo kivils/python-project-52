@@ -77,7 +77,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tz_detect.middleware.TimezoneMiddleware',
-    'task_manager.rollbar_middleware.CustomRollbarNotifierMiddleware',
 ]
 
 MESSAGE_TAGS = {
@@ -135,6 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
         },
     },
 ]
+AUTH_USER_MODEL = 'auth.User'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 

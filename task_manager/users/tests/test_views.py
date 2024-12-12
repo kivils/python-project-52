@@ -6,10 +6,10 @@ import os
 
 @override_settings(
     SECRET_KEY='fake-key',
-    FIXTURE_DIRS=[os.path.join(os.path.dirname(__file__), 'task_manager/users/tests/fixtures')]
+    FIXTURE_DIRS=[os.path.join(os.path.dirname(__file__), 'fixtures')]
 )
 class UsersViewTest(TestCase):
-    fixtures = ['users/tests/fixtures/users.yaml']
+    fixtures = ['users']
 
     def setUp(self):
         self.client = Client()

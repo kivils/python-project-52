@@ -44,7 +44,7 @@ class UserCreateForm(UserCreationForm):
            'first_name': 'Имя',
            'last_name': 'Фамилия',
            'username': 'Имя пользователя',
-           }
+        }
 
 
 class UserUpdateForm(UserChangeForm):
@@ -84,7 +84,7 @@ class UserUpdateForm(UserChangeForm):
            'first_name': 'Имя',
            'last_name': 'Фамилия',
            'username': 'Имя пользователя',
-           }
+        }
 
 
 class LoginUserForm(AuthenticationForm):

@@ -5,14 +5,12 @@ from django.contrib import auth
 from task_manager.statuses.models import Statuses
 import os
 
-
 @override_settings(
     SECRET_KEY='fake-key',
-    FIXTURE_DIRS=[os.path.join(os.path.dirname(__file__), 'statuses/tests/fixtures')]
+    FIXTURE_DIRS=[os.path.join(os.path.dirname(__file__), 'fixtures')]
 )
 class StatusViewsTest(TestCase):
-    fixtures = ['statuses/tests/fixtures/statuses.yaml']
-                # , 'users.yaml']
+    fixtures = ["statuses", "users"]
 
     def setUp(self):
         self.client = Client()

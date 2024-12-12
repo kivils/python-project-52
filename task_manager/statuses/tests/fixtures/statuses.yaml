@@ -1,9 +1,11 @@
-- model: statuses.statuses
+- model: statuses.Statuses
   pk: 1
   fields:
     name: "In progress"
+    created_at": "2024-12-12 18:41:22.273 +0100" 
 
-- model: statuses.statuses
+- model: statuses.Statuses
   pk: 2
   fields:
     name: "Finished"
+    created_at": "2024-12-12 18:41:22.273 +0100"
