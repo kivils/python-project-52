@@ -6,6 +6,7 @@
             "author_id": 1,
             "name": "Test Task1",
             "description": "Some description for task1",
+            "created_at": "2024-12-12 18:41:22.273 +0100",
             "status_id": 1,
             "executor_id": 1,
             "labels": [1, 2]
@@ -17,6 +18,7 @@
         "fields": {
             "author_id": 1,
             "name": "Test Task2",
+            "created_at": "2024-12-12 18:41:22.273 +0100",
             "status_id": 2,
             "labels": [2]
         }
@@ -27,8 +29,10 @@
         "fields": {
             "author_id": 2,
             "name": "Test Task3",
+            "created_at": "2024-12-12 18:41:22.273 +0100",
             "status_id": 1,
-            "executor_id": 2
+            "executor_id": 2,
+            "labels": []
         }
     }
 ]

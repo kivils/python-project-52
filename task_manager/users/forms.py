@@ -41,9 +41,9 @@ class UserCreateForm(UserCreationForm):
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username']
         labels = {
-           'first_name': 'Имя',
-           'last_name': 'Фамилия',
-           'username': 'Имя пользователя',
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            'username': 'Имя пользователя',
         }
 
 
@@ -81,9 +81,9 @@ class UserUpdateForm(UserChangeForm):
         model = get_user_model()
         fields = ['first_name', 'last_name', 'username']
         labels = {
-           'first_name': 'Имя',
-           'last_name': 'Фамилия',
-           'username': 'Имя пользователя',
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            'username': 'Имя пользователя',
         }
 
 

@@ -23,9 +23,9 @@ class TaskForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control',
                                            'placeholder': 'Имя'}),
             'description': forms.Textarea(
-                                      attrs={'class': 'form-control',
-                                             'placeholder': 'Описание',
-                                             "rows": 10, "cols": 20}),
+                attrs={'class': 'form-control',
+                       'placeholder': 'Описание',
+                       "rows": 10, "cols": 20}),
             'status': forms.Select(attrs={'class': 'form-select'}),
             'labels': forms.SelectMultiple(attrs={'class': 'form-select'})
         }
