@@ -1,6 +1,7 @@
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
 from django.contrib import auth
+from task_manager.settings import LOGIN_URL
 from task_manager.tasks.models import Task
 import os
 
@@ -18,7 +19,7 @@ class TaskViewsTest(TestCase):
         self.users_model = auth.get_user_model()
         self.user = self.users_model.objects.get(pk=1)
         self.user2 = self.users_model.objects.get(pk=2)
-        self.login_url = reverse('login')
+        self.login_url = reverse(LOGIN_URL)
         self.task_create_url = reverse('task_create')
         self.task_view_url = reverse('task_detail', kwargs={'pk': 1})
         self.task_update_url1 = reverse('task_update', kwargs={'pk': 1})
@@ -27,15 +28,17 @@ class TaskViewsTest(TestCase):
         self.task_delete_url2 = reverse('task_delete', kwargs={'pk': 2})
         self.tasks_url = reverse('tasks')
 
+    def test_anonym_user_tasks_index(self):
+        response = self.client.get(self.tasks_url)
+        self.assertRedirects(response, reverse(self.login_url),
+                             status_code=302, target_status_code=302,
+                             fetch_redirect_response=False)
+
     def test_auth_user_tasks_index(self):
         self.client.force_login(self.user)
         response = self.client.get(self.tasks_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'tasks/index.html')
-
-    # def test_anonym_user_tasks_index(self):
-    #     response = self.client.get(self.tasks_url)
-    #     self.assertRedirects(response, self.login_url)
 
     def test_auth_user_task_create_GET(self):
         self.client.force_login(self.user)
