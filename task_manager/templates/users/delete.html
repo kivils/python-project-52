@@ -10,7 +10,7 @@
 	<p>{% trans "Are you sure you want to delete" %} {{ user.get_full_name }}?</p>
 	<form method="post">
 		{% csrf_token %}
-		{{ form.as_p }}
+		{% bootstrap_form form %}
 		<input class="btn btn-danger" type="submit" value="{% trans "Yes, delite" %}">
 	</form>
   </div>

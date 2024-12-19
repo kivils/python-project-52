@@ -7,7 +7,7 @@
 {% block content %}
 <h1 class="my-4">{% trans "Task view" %}</h1>
 <div class="card shadow border-0 table-rounded">
-    <div class="card-header bg-dark text-warning">
+    <div class="card-header bg-secondary text-white">
         <h2>{{ task.name }}</h2>
     </div>
     <div class="card-body bg-light">
@@ -34,7 +34,7 @@
             </div>
             <div class="row p-1">
                 <div class="col">
-                    <h6>{% trans "Labels" %}</h6>
+                    <h6>{% trans "Labels:" %}</h6>
                     <ul>
                         {% for label in task.labels.all %}
                         <li>{{ label.name }}</li>
