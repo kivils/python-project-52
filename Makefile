@@ -22,5 +22,5 @@ lint:
 test:
 	poetry run pytest --cov=task_manager
 
-test-coverage:
-	poetry run pytest --cov=task_manager --cov-report=xml:coverage.xml
+# test-coverage:
+# 	poetry run pytest --cov=task_manager --cov-report=xml:coverage.xml

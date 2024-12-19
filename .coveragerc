@@ -1,6 +1,0 @@
-[run]
-omit =
-    */tests/*
-    */wsgi.py
-    */asgi.py
-    */settings.py
