@@ -17,7 +17,7 @@ class TaskAbstractMixin(LoginRequireMixin):
     form_class = TaskForm
 
 
-class TaskIndexView(FilterView):
+class TaskIndexView(TaskAbstractMixin, FilterView):
     model = Task
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'

@@ -30,9 +30,7 @@ class TaskViewsTest(TestCase):
 
     def test_anonym_user_tasks_index(self):
         response = self.client.get(self.tasks_url)
-        self.assertRedirects(response, reverse(self.login_url),
-                             status_code=302, target_status_code=302,
-                             fetch_redirect_response=False)
+        self.assertRedirects(response, self.login_url)
 
     def test_auth_user_tasks_index(self):
         self.client.force_login(self.user)
