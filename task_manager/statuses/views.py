@@ -42,7 +42,7 @@ class StatusUpdateView(StatusAbstractMixin, UpdateView):
 class StatusDeleteView(LoginRequireMixin, DeleteView):
     model = Statuses
     template_name = 'statuses/delete.html'
-    login_url = reverse_lazy('statuses')
+    login_url = "/login/"
     success_message = _('Status has been deleted successfully.')
 
     def post(self, request, *args, **kwargs):
