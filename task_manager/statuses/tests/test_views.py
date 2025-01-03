@@ -1,6 +1,5 @@
 from django.test import TestCase, Client, override_settings
 from django.urls import reverse
-from django.conf import settings
 from django.contrib import auth
 from task_manager.settings import LOGIN_URL
 from task_manager.statuses.models import Statuses
