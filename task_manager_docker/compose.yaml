@@ -1,38 +1,14 @@
 services:
-
-  db:
-    container_name: task_manager_db
-    env_file:
-      - .env
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-    image: postgres:14-alpine
+  postgres:
+    image: postgres
+    env:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    options: >-
+      --health-cmd pg_isready
+      --health-interval 10s
+      --health-timeout 5s
+      --health-retries 5
     ports:
-      - "5433:5432"
-    volumes:
-      - task_manager_db:/var/lib/postgresql/data
-    # Хелсчек для проверки готовности БД к работе
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
-
-  web:
-    container_name: task_manager_web
-    image: Xrustic/python-project-52:latest
-    env_file:
-      - .env
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@pgdatabase:5432/postgres
-    ports:
-      - "${SERVICE_PORT}:8000"
-    command: bash -c "python manage.py migrate && make gunicorn"
-
-  volumes:
-    task_manager_db:
+      - 5432:5432
