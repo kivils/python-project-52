@@ -46,12 +46,12 @@ jobs:
       - name: updating PATH to enable importing my package
         run: echo "PYTHONPATH=home/runner/work/python-project-52/python-project-52" >> $GITHUB_ENV
         shell: bash
-#      - name: Connect to PostgreSQL
-#        run: |
-#          make dev
-#        env:
-#          POSTGRES_HOST: localhost
-#          POSTGRES_PORT: 5432
+      - name: Connect to PostgreSQL
+        run: |
+          make dev
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
       - name: Run tests
         env:
           SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
