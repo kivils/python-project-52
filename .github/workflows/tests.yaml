@@ -38,7 +38,7 @@ jobs:
         run: |
           make lint
       - name: updating PATH to enable importing my package
-        run: echo "PYTHONPATH=home/runner/work/Xrustic/python-project-52" >> $GITHUB_ENV
+        run: echo "PYTHONPATH=home/runner/work/Xrustic/python-project-52/.venv" >> $GITHUB_ENV
         shell: bash
       - name: Connect to PostgreSQL
         run: |
