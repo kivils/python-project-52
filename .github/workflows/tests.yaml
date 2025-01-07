@@ -42,6 +42,7 @@ jobs:
         shell: bash
       - name: Connect to PostgreSQL
         run: |
+          echo %PYTHONPATH%
           make dev
         env:
           POSTGRES_HOST: localhost
