@@ -36,6 +36,7 @@ jobs:
           pip install django
           pip install dj-database-url
           pip install python-dotenv
+          pip install django-tz-detect
           make install
       - name: Run linter
         run: |
