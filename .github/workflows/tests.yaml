@@ -34,7 +34,7 @@ jobs:
         run: |
           pip install poetry
           make install
-          pip install home/runner/work/python-project-52/python-project-52/requirements.txt
+          pip install -r home/runner/work/python-project-52/python-project-52/requirements.txt
       - name: Run linter
         run: |
           make lint
