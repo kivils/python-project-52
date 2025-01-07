@@ -35,6 +35,8 @@ jobs:
         run: |
           make lint
       - name: Run tests
+        env:
+          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
         run: |
           make test
       - name: Test & publish code coverage
