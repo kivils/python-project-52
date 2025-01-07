@@ -34,6 +34,7 @@ jobs:
         run: |
           pip install poetry
           pip install django
+          pip install dj-database-url
           make install
       - name: Run linter
         run: |
