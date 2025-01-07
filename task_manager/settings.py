@@ -17,6 +17,7 @@ import dj_database_url
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages import constants as messages
+from django.db.backends import postgresql
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -110,11 +111,14 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+db_config = dj_database_url.config(
+    conn_max_age=600,
+    default=DATABASE_URL
+)
+db_config['ENGINE']='django.db.backends.postgresql'
+
 DATABASES = {
-    'default': dj_database_url.config(
-        conn_max_age=600,
-        default=DATABASE_URL
-    )
+    'default': db_config,
 }
 
 
