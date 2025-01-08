@@ -3,27 +3,31 @@ name: django-test
 on:
   - push
 
+env:
+  DATABASE_URL: sqlite:///sqlite.db
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 jobs:
   test-task_manager:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [ '3.12' ]
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
+#    services:
+#      postgres:
+#        image: postgres
+#        env:
+#          POSTGRES_DB: postgres
+#          POSTGRES_USER: postgres
+#          POSTGRES_PASSWORD: postgres
+#          POSTGRES_HOST: localhost
+#        options: >-
+#          --health-cmd pg_isready
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
+#        ports:
+#          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -41,12 +45,12 @@ jobs:
         run: echo "PYTHONPATH=home/runner/work/python-project-52/python-project-52" >> $GITHUB_ENV
         shell: bash
       - name: Run tests
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
-          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
+#        env:
+#          POSTGRES_DB: postgres
+#          POSTGRES_USER: postgres
+#          POSTGRES_PASSWORD: postgres
+#          POSTGRES_HOST: localhost
+#          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
         run: |
           make test
       - name: Test & publish code coverage
