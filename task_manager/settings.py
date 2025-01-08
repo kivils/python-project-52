@@ -115,13 +115,13 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 db_config = dj_database_url.config(
     conn_max_age=600,
-    default=DATABASE_URL
+    # default=DATABASE_URL
 )
-db_config['ENGINE']='django.db.backends.postgresql'
-db_config['POSTGRES_HOST']=os.getenv("POSTGRES_HOST")
-db_config['TEST']={
-    'NAME': 'mytestdatabase'
-}
+# db_config['ENGINE']='django.db.backends.postgresql'
+# db_config['POSTGRES_HOST']=os.getenv("POSTGRES_HOST")
+# db_config['TEST']={
+#     'NAME': 'mytestdatabase'
+# }
 
 DATABASES = {
     'default': db_config,
