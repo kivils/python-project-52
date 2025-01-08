@@ -118,6 +118,7 @@ db_config = dj_database_url.config(
     default=DATABASE_URL
 )
 db_config['ENGINE']='django.db.backends.postgresql'
+db_config['POSTGRES_HOST']=os.getenv("POSTGRES_HOST")
 
 DATABASES = {
     'default': db_config,
