@@ -20,7 +20,7 @@ lint:
 	poetry run flake8 task_manager --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,*/migrations
 
 test:
-	poetry run pytest --cov=task_manager
+	poetry run pytest task_manager/statuses/tests/test_views.py --cov=task_manager
 
 test-coverage:
 	poetry run pytest --cov=task_manager --cov-report=xml:coverage.xml
