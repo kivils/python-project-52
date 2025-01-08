@@ -37,11 +37,11 @@ jobs:
         run: |
           make lint
       - name: updating PATH to enable importing my package
-        run: echo "::set-env name=PYTHONPATH::home/runner/work/python-project-52"
+        run: echo "PYTHONPATH=home/runner/work/python-project-52/python-project-52" >> $GITHUB_ENV
         shell: bash
       - name: Connect to PostgreSQL
         run: |
-          make dev
+          make build
         env:
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
