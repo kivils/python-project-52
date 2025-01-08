@@ -4,7 +4,6 @@ on:
   - push
 
 env:
-  # we're specifying sqlite db URI to make tests run in-memory
   DATABASE_URL: sqlite:///sqlite.db
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
@@ -34,12 +33,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-        # make depends on poetry
       - name: Install Dependencies
         run: |
           pip install poetry
           make install
-          pip install -r requirements.txt
       - name: Run linter
         run: |
           make lint
