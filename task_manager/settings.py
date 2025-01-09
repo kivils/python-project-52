@@ -113,19 +113,21 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-db_config = dj_database_url.config(
-    conn_max_age=600,
-    # default=DATABASE_URL
-)
-# db_config['ENGINE']='django.db.backends.postgresql'
-# db_config['POSTGRES_HOST']=os.getenv("POSTGRES_HOST")
-# db_config['TEST']={
-#     'NAME': 'mytestdatabase'
-# }
-
 DATABASES = {
-    'default': db_config,
+    'default': dj_database_url.config(
+        default=os.getenv(
+            'DATABASE_URL',
+            'postgresql://pguser:pgpass@localhost:5432/pgdb'
+        ),
+        conn_max_age=600
+    )
 }
+
+if os.getenv('DB_ENGINE') == 'SQLite':
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
 
 # Password validation

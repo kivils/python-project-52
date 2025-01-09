@@ -1,69 +1,35 @@
-name: django-test
+name: PyCI  # или что-то подобное
 
 on:
   - push
+  - pull_request
 
 jobs:
-  test-task_manager:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '3.10' ]
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
+        python-version: [ 3.10 ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           pip install poetry
           make install
       - name: Run linter
         run: |
           make lint
-      - name: updating PATH to enable importing my package
-        run: echo "PYTHONPATH=/home/runner/work/python-project-52/python-project-52" >> $GITHUB_ENV
-        shell: bash
-      - name: Connect to PostgreSQL
-        run: |
-          make dev
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-      - name: Run tests
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
-          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
-        run: |
-          make test
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
+        uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}  # это устанавливаем в настройках проекта (переменные окружения)
+          DB_ENGINE: SQLite  # а вот тут можно сделать такой механизм, чтобы не поднимать постгрес сервис в ci
+          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi  # любой секрет ставим (тк тесты)
         with:
           coverageCommand: make test-coverage
           debug: true
