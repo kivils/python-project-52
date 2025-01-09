@@ -1,11 +1,11 @@
-name: PyCI  # или что-то подобное
+name: PyCI
 
 on:
   - push
   - pull_request
 
 jobs:
-  build:
+  push:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,7 +24,7 @@ jobs:
         run: |
           make lint
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.2.0
+        uses: paambaati/codeclimate-action@vv5.0.0
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
