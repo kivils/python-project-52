@@ -115,10 +115,6 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv(
-            'DATABASE_URL',
-            'postgresql://pguser:pgpass@localhost:5432/pgdb'
-        ),
         conn_max_age=600
     )
 }

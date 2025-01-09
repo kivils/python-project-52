@@ -11,11 +11,11 @@ jobs:
       matrix:
         python-version: [ 3.10 ]
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           pip install poetry
@@ -27,9 +27,9 @@ jobs:
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}  # это устанавливаем в настройках проекта (переменные окружения)
-          DB_ENGINE: SQLite  # а вот тут можно сделать такой механизм, чтобы не поднимать постгрес сервис в ci
-          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi  # любой секрет ставим (тк тесты)
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          DB_ENGINE: SQLite
+          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
         with:
           coverageCommand: make test-coverage
           debug: true

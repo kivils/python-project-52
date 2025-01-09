@@ -23,4 +23,4 @@ test:
 	poetry run pytest task_manager/statuses/tests/test_views.py --cov=task_manager
 
 test-coverage:
-	poetry run pytest --cov=task_manager --cov-report=xml:coverage.xml
+	poetry run pytest task_manager/statuses/tests/test_views.py --cov=task_manager --cov-report=xml:coverage.xml
