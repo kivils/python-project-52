@@ -1,12 +1,8 @@
-name: PyCI
+name: PyCI  # или что-то подобное
 
 on:
   - push
   - pull_request
-
-env:
-  ENGINE: django.db.backends.postgresql
-  DATABASE_URL: postgresql:///postgresql.db
 
 jobs:
   build:
@@ -14,22 +10,6 @@ jobs:
     strategy:
       matrix:
         python-version: [ '3.10' ]
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
-          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -38,28 +18,18 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install poetry
+          make install
       - name: Run linter
         run: |
           make lint
-      - name: updating PATH to enable importing my package
-        run: echo "PYTHONPATH=/home/runner/work/Xrustic/python-project-52" >> $GITHUB_ENV
-        shell: bash
-      - name: Run migrations
-        run: |
-          python3 manage.py migrate
-        env:
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: postgres
-          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          DB_ENGINE: SQLite
+          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
         with:
           coverageCommand: make test-coverage
           debug: true
