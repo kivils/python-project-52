@@ -4,6 +4,11 @@ on:
   - push
   - pull_request
 
+env:
+  ENGINE: django.db.backends.postgresql
+  DATABASE_URL: postgresql:///postgresql.db
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
