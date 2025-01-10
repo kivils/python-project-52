@@ -23,6 +23,12 @@ jobs:
       - name: Run linter
         run: |
           make lint
+      - name: Create migrations
+        run: |
+          python3 manage.py makemigrations
+      - name: Migrate
+        run: |
+          python3 manage.py migrate
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
