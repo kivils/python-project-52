@@ -7,7 +7,6 @@ on:
 env:
   ENGINE: django.db.backends.postgresql
   DATABASE_URL: postgresql:///postgresql.db
-  SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
   build:
@@ -50,6 +49,12 @@ jobs:
       - name: Run migrations
         run: |
           python3 manage.py migrate
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST: localhost
+          SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
