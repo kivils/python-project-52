@@ -53,7 +53,7 @@ jobs:
           POSTGRES_DB: postgres
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: postgres
           SECRET_KEY: 1t-&v$8p_x+^+6t*7c+6!ki4z+50zj&jql3lo%9#4^)p58=mbi
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
