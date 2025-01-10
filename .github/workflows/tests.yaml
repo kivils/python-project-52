@@ -44,6 +44,9 @@ jobs:
       - name: Run linter
         run: |
           make lint
+      - name: updating PATH to enable importing my package
+        run: echo "PYTHONPATH=/home/runner/work/Xrustic/python-project-52" >> $GITHUB_ENV
+        shell: bash
       - name: Run migrations
         run: |
           python3 manage.py migrate
