@@ -17,7 +17,7 @@ import dj_database_url
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages import constants as messages
-from django.db.backends import postgresql
+from django.db.backends import postgresql, sqlite3
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
