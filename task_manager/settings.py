@@ -17,7 +17,6 @@ import dj_database_url
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages import constants as messages
-from django.db.backends import postgresql, sqlite3
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -115,19 +114,10 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv(
-            'DATABASE_URL',
-            'postgresql://pguser:pgpass@localhost:5432/pgdb'
-        ),
-        conn_max_age=600
+        conn_max_age=600,
     )
 }
 
-if os.getenv('DB_ENGINE') == 'SQLite':
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
 
 
 # Password validation
