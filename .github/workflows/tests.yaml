@@ -26,9 +26,6 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Run dev
-        run: |
-          make dev
       - name: Run linter
         run: |
           make lint
