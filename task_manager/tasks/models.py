@@ -13,8 +13,7 @@ class Task(models.Model):
     )
     description = models.CharField(verbose_name='Описание',
                                    unique=False,
-                                   null=True, blank=True,
-                                   max_length=150)
+                                   null=True, blank=True)
     status = models.ForeignKey(Statuses,
                                on_delete=models.PROTECT,
                                verbose_name='Статус', unique=False,
