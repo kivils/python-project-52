@@ -191,7 +191,9 @@ LOGIN_REDIRECT_URL = 'index'
 
 ROLLBAR = {
     'access_token': '8d71b2a666e7420ab0ba5b3869878fd1',
+    'client_token': '8d71b2a666e7420ab0ba5b3869878fd1',
     'environment': 'development' if DEBUG else 'production',
     'code_version': '1.0',
+    'branch': 'main',
     'root': BASE_DIR,
 }
