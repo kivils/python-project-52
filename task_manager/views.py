@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from task_manager.users.forms import LoginUserForm
 from django.contrib.auth.views import LoginView, LogoutView
@@ -24,6 +25,12 @@ class LogoutUser(LogoutView):
     def get_success_url(self):
         messages.info(self.request, _('You are logged out'))
         return reverse_lazy('index')
+
+
+def index(request):
+    a = None
+    a.hello()  # Creating an error with an invalid line of code
+    return HttpResponse("Hello, world. You're at the pollapp index.")
 
 
 def page_not_found_view(request, *args, **kwargs):
